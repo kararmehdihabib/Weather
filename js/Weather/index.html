@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <link rel="stylesheet" type="text/css" href="css/searchMeme.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/jquery.searchMeme.js"></script>
+  <script src="js/jssor.slider.mini.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script>
+  /*searchbox*/
+  $(document).ready(function () {
+            var search = $('input').searchMeme({ onSearch: function (searchText) {
+                setTimeout(function () {
+                    search.searchMeme({ searchComplete: true });
+					alert(cityName);
+                }, 1);
+            }
+            , buttonPlacement: 'left', button: 'black'
+            });
+		$.fn.extend({
+    animateCss: function (animationName) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        $(this).addClass('animated ' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+        });
+    }
+});
+        });
+  var URL;
+ 
+  var app = angular.module("Weather", [])
+	
+.controller('myCtrl', ['$scope', '$http', function($scope, $http ) {
+setTimeout(function () {
+	 $http.get("http://ip-api.com/json")
+  .then(function(response) {
+      $scope.datum=response.data;
+	  console.log($scope.datum);
+	   $http.get("http://api.openweathermap.org/data/2.5/weather?q="+$scope.datum.regionName+"&appid=aa211f0d77a1bb42ddcdc492fa881c63&type=like&units=metric")
+  .then(function(response) {
+      $scope.icon = response.data.weather[0].icon;
+	  $scope.temp = response.data.main.temp+"°C";
+	  $scope.content = response.data;
+	$('#body').css('background-image', 'url(bg.jpg)');
+	$('#body').css('background-size', '100% 100%');
+	 divOne.style.visibility = 'visible';
+	  $('#body').animateCss('flipInX');
+	  $('#animate').animateCss('fadeInRightBig');
+	  document.getElementById('image').src = "http://openweathermap.org/img/w/"+$scope.icon+".png";
+	  console.log($scope.content);
+  }, function(response) {
+      $scope.content = "Something went wrong";
+  });
+	
+  }, function(response) {
+      $scope.content = "Something went wrong";
+  });
+    }, 0);
+  
+   
+ 
+    
+	var divOne = document.getElementById('image');
+     divOne.style.visibility = 'hidden';
+	 
+    $(".watchInput").on("change keydown",function(){
+	
+	setTimeout(function () {
+		var cityName=$scope.city;
+		/*console.log(cityName);*/
+	if(cityName!==undefined){
+  $http.get("http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=aa211f0d77a1bb42ddcdc492fa881c63&type=like&units=metric")
+  .then(function(response) {
+      $scope.icon = response.data.weather[0].icon;
+	  $scope.temp = response.data.main.temp+"°C";
+	  $scope.content = response.data;
+	$('#body').css('background-image', 'url(bg.jpg)');
+	 divOne.style.visibility = 'visible';
+	  $('#body').animateCss('rollIn');
+	  $('#animate').animateCss('fadeInRightBig');
+	  document.getElementById('image').src = "http://openweathermap.org/img/w/"+$scope.icon+".png";
+	  console.log($scope.content);
+  }, function(response) {
+      $scope.content = "Something went wrong";
+  });
+        $scope.$apply();
+
+
+	}
+    }, 5000);
+    });
+ 
+   
+
+}])
+</script>
+</head>
+ 
+
+
+<body class="animated fadeIn">
+<div ng-app="Weather" ng-controller="myCtrl">
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+	<div class="container">
+	
+		<div class="navbar-header">
+		<input ng-model="city" class="watchInput center-block" id="search" align="middle" type="text" class="form-control"/>
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					 <li><a href="http://users.metropolia.fi/~kararha/Weather/">Refresh</a></li>
+					 <!---
+					<li><a href="#">Portfolio</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>---->
+					<!----<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes</a>
+						</li>---->
+						
+	</div>
+	</div>
+<!----<div class="navbar">
+<div class="container-fluid">
+<ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+	  </ul>
+	</div> 
+	<div><img align="right" src="images/brand-icon.png" width="44"/>
+	</div>
+</div>
+ <div >---->
+ 
+ </div>
+ <div id="body" class="fullscreen">
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <p></p>
+ <p>
+ <h1 align="center" id="animate">{{content.name}}</h1>
+ <h2 align="center"><img src="" id="image" width="70" height="70"/>{{temp}}</h2></p>
+</div>
+</div>
+</body>
+
+
+
+</html>
+

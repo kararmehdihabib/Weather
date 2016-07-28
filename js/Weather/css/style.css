@@ -1,0 +1,82 @@
+@import url(https://fonts.googleapis.com/css?family=Freckle+Face);
+.navbar-nav>li>a {
+background: #b3b3b3;
+}
+#body {
+  -vendor-animation-duration: 3s;
+  -vendor-animation-delay: 2s;
+  -vendor-animation-iteration-count:1;
+}
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  
+}
+.navbar{
+	position:fixed;
+   left:0px;
+   top:0px;
+   height:52px;
+   background: #404040; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #404040, #b3b3b3); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #404040, #b3b3b3); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right,#404040, #b3b3b3); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #404040, #b3b3b3); /* Standard syntax */
+  border:none;
+}
+.nav{
+	position:absolute;
+	left:25%;
+	vertical-align:middle;
+}
+ .nav li {
+	display:inline-block;
+	float:none;
+	margin:0 60px;
+	vertical-align:middle;
+}
+.nav li a{
+	color:#ffffff !important;
+	font-family: 'Freckle Face', cursive;
+	font-size:18px;
+}
+input[type=text]{
+	color:#ffffff;
+	font-family: 'Freckle Face', cursive;
+	font-size:18px;
+}
+h1{
+	color:#ffffff;
+	font-family: 'Freckle Face', cursive !important;
+	font-size:80px !important;
+}
+h2{
+	color:#ffffff;
+	font-family: 'Freckle Face', cursive !important;
+	font-size:40px !important;
+}
+
+ .nav li a:hover{
+	color:#333333 !important;
+}
+footer{
+		position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background: #404040; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #404040, #404040); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #404040, #404040); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right,#404040, #404040); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #404040, #404040); /* Standard syntax */
+  border:none;
+  color:#ffffff;
+	font-family: 'Freckle Face', cursive;
+	font-size:18px;
+	text-align:center;
+}

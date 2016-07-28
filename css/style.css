@@ -1,0 +1,246 @@
+@import url(https://fonts.googleapis.com/css?family=Freckle+Face);
+.navbar-nav>li>a {
+background: #b3b3b3;
+}
+#body {
+  -vendor-animation-duration: 3s;
+  -vendor-animation-delay: 2s;
+  -vendor-animation-iteration-count:1;
+  
+
+}
+@media only screen and (max-width: 1024px){
+	#body{
+	    background-position: 50% 30% !important;
+	}
+}
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  
+}
+.navbar{
+	position:fixed;
+   left:0px;
+   top:0px;
+   height:52px;
+   background: #404040; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #404040, #b3b3b3); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #404040, #b3b3b3); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right,#404040, #b3b3b3); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #404040, #b3b3b3); /* Standard syntax */
+  border:none;
+}
+.nav{
+	position:absolute;
+	left:25%;
+	vertical-align:middle;
+}
+ .nav li {
+	display:inline-block;
+	float:none;
+	margin:0 60px;
+	vertical-align:middle;
+}
+.nav li a{
+	color:#ffffff !important;
+	font-family: 'Freckle Face', cursive;
+	font-size:18px;
+}
+input[type=text]{
+	color:#ffffff;
+	font-family: 'Freckle Face', cursive;
+	font-size:18px;
+}
+h1{
+	color:white !important;
+	font-family: 'Freckle Face', cursive !important;
+	font-size:39px !important;
+}
+h2{
+	color:white !important;
+	font-family: 'Freckle Face', cursive !important;
+	font-size:29px !important;
+}
+h6{
+	color:black !important;
+	font-family: 'Freckle Face', cursive !important;
+	font-size:23px !important;
+}
+.h6{
+	color:black !important;
+	font-family: 'Freckle Face', cursive !important;
+	font-size:16px !important;
+}
+
+ .nav li a:hover{
+	color:#333333 !important;
+}
+footer{
+		position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background: #404040; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #404040, #404040); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #404040, #404040); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right,#404040, #404040); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #404040, #404040); /* Standard syntax */
+  border:none;
+  color:#ffffff;
+	font-family: 'Freckle Face', cursive;
+	font-size:18px;
+	text-align:center;
+}
+input.cmn-toggle-round + label {
+  padding: 2px;
+  width: 120px;
+  height: 60px;
+  background-color: #dddddd;
+  border-radius: 60px;
+}
+input.cmn-toggle-round + label:before,
+input.cmn-toggle-round + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
+}
+input.cmn-toggle-round + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round + label:after {
+  width: 58px;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: margin 0.4s;
+}
+input.cmn-toggle-round:checked + label:before {
+  background-color: #8ce196;
+}
+input.cmn-toggle-round:checked + label:after {
+  margin-left: 60px;
+}
+.container1
+{
+  text-align: center;
+  padding: 15px;  
+}
+
+.left-div
+{
+  display: inline-block;
+  max-width: 300px;
+  text-align: left;
+  padding: 30px;
+  background:transparent;
+  border-radius: 3px;
+  margin: 15px;
+  vertical-align: top;
+}
+#left-div
+{
+   display: inline-block;
+  max-width: 300px;
+  text-align: left;
+  padding: 30px;
+  background:white;
+  border-radius: 3px;
+  margin: 15px;
+  vertical-align: top;
+}
+.right-div
+{
+  display: inline-block;
+  max-width: auto;
+  max-height:auto;
+  text-align: center;
+  padding: 30px;
+  background: white;
+  opacity:0.6;
+  border-radius: 50px 0px;
+  margin: 15px;
+}
+.left-text, .right-text
+{
+  font: 300 16px/1.6 'Helvetica Neue' sans-serif;
+	color: #333;
+}
+@media screen and (max-width: 600px) 
+{
+  .left-div, .right-div
+    {
+       max-width: auto;
+	   max-height:auto;
+    }
+}
+ table {
+    border: 1px solid #ccc;
+    width: 100%;
+    margin:0;
+    padding:0;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  table tr {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+
+  table th, table td {
+    padding: 10px;
+    text-align: center;
+  }
+
+  table th {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  @media screen and (max-width: 600px) {
+
+    table {
+      border: 0;
+    }
+
+    table thead {
+      display: none;
+    }
+
+    table tr {
+      margin-bottom: 10px;
+      display: block;
+      border-bottom: 2px solid #ddd;
+    }
+
+    table td {
+      display: block;
+      text-align: right;
+      font-size: 13px;
+      border-bottom: 1px dotted #ccc;
+    }
+
+    table td:last-child {
+      border-bottom: 0;
+    }
+
+    table td:before {
+      content: attr(data-label);
+      float: left;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
