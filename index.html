@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
 	<link rel="stylesheet" type="text/css" href="css/searchMeme.css">
+	<meta http-equiv="Content-type" value="text/html; charset=utf-8">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -17,279 +18,9 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<script src="http://widget.time.is/en.js"></script>
+	<script type="text/javascript" src="js/app.js" charset="iso-8859"></script>
 	<script>
-	/*city,country serachbox*/
-	$(document).ready(function () {
-		var search = $('#input').searchMeme({ onSearch: function (searchText) {
-			setTimeout(function () {
-				search.searchMeme({ searchComplete: true });
-				alert(cityName);
-			}, 1);
-		}
-		, buttonPlacement: 'left', button: 'black'
-	});
-		$.fn.extend({
-			animateCss: function (animationName) {
-				var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-				$(this).addClass('animated ' + animationName).one(animationEnd, function() {
-					$(this).removeClass('animated ' + animationName);
-				});
-			}
-		});
-	});
 
-	/*anugular app*/
-	var app = angular.module("Weather", [])
-	/*Controller*/
-	.controller('weatherCtrl', ['$scope', '$http', function($scope, $http ) {
-		setTimeout(function () {
-			$http.get("http://ip-api.com/json")
-			.then(function(response) {
-				currentLocationInfo=response.data;
-				console.log(currentLocationInfo);
-				currentLatitude = currentLocationInfo.lat;
-				currentLongitude = currentLocationInfo.lon;
-
-				$http.get("http://api.geonames.org/timezoneJSON?lat="+currentLatitude+"&lng="+currentLongitude+"&username=kararha")
-				.then(function(response) {
-				    var dateAndTime = response.data.time;
-					$scope.currentTime = dateAndTime.slice(10,16);
-					country = response.data.countryName;
-					console.log(response.data);
-
-					$http.get("http://api.openweathermap.org/data/2.5/forecast?q="+currentLocationInfo.regionName+"&mode=json&appid=56c89ec82c5dc251f6c37dc7d752e0d8&units=metric")
-					.then(function(response) {
-						console.log(response.data);
-						$scope.content = response.data;
-						$scope.weatherIcon = $scope.content.list[0].weather[0].icon;
-						var roundedTemperature_currentloc= Math.round($scope.content.list[0].main.temp);
-						console.log(roundedTemperature_currentloc)
-						$scope.finalTempView= roundedTemperature_currentloc+"°C";		
-						$scope.windSpeed= $scope.content.list[0].wind.speed+" m/s";
-						$scope.humidity= $scope.content.list[0].main.humidity+"%";
-						$scope.pressure= $scope.content.list[0].main.pressure+" hpa";
-						$scope.maxTemp= $scope.content.list[0].main.temp_max+"°C";
-						$scope.minTemp= $scope.content.list[0].main.temp_min+"°C";
-						$scope.weatherDescription= $scope.content.list[0].weather[0].description;
-						//3 hour interval weather forecast
-						for(var j=0;j<8;j++){
-							switch(j){
-								case 1:
-								var roundedTemp3hour_currentloc = Math.round(response.data.list[1].main.temp);
-								$scope.finalTemperature= roundedTemp3hour_currentloc+"°C";
-								$scope.descriptionWeather= $scope.content.list[1].weather[0].description;
-								$scope.weatherIcon = response.data.list[1].weather[0].icon;
-			 					document.getElementById('3hr_firstTemp').innerHTML =$scope.finalTemperature;
-			 					document.getElementById('3hr_firstWDescription').innerHTML =$scope.descriptionWeather;
-			 					document.getElementById('3hr_firstWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-			 					 break;
-			 					case 2:
-			 					roundedTemp3hour_currentloc = Math.round(response.data.list[2].main.temp);
-			 					$scope.finalTemperature= roundedTemp3hour_currentloc+"°C";
-			 					$scope.descriptionWeather= $scope.content.list[2].weather[0].description;
-			 					$scope.weatherIcon = response.data.list[2].weather[0].icon;
-			 					document.getElementById('3hr_secondTemp').innerHTML =$scope.finalTemperature;
-			 					document.getElementById('3hr_secondWDescription').innerHTML =$scope.descriptionWeather;
-			 					document.getElementById('3hr_secondWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-								break;
-			 					case 3:
-			 					roundedTemp3hour_currentloc = Math.round(response.data.list[3].main.temp);
-			 					$scope.finalTemperature= roundedTemp3hour_currentloc+"°C";
-			 					$scope.descriptionWeather= $scope.content.list[3].weather[0].description;
-								$scope.weatherIcon = $scope.content.list[3].weather[0].icon;
-			 					document.getElementById('3hr_thirdTemp').innerHTML =$scope.finalTemperature;
-			 					document.getElementById('3hr_thirdWDescription').innerHTML =$scope.descriptionWeather;
-			 					document.getElementById('3hr_thirdWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-			 					break;
-			 					case 4:
-			 					roundedTemp3hour_currentloc = Math.round(response.data.list[4].main.temp);
-			 					$scope.finalTemperature= roundedTemp3hour_currentloc+"°C";
-			 					$scope.descriptionWeather= $scope.content.list[4].weather[0].description;
-			 					$scope.weatherIcon = response.data.list[4].weather[0].icon;
-			 					document.getElementById('3hr_fourthTemp').innerHTML =$scope.finalTemperature;
-			 					document.getElementById('3hr_fourthWDescription').innerHTML =$scope.descriptionWeather;
-			 					document.getElementById('3hr_fourthWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-								break;
-			 					case 5:
-			 				 	roundedTemp3hour_currentloc = Math.round(response.data.list[5].main.temp);
-			 					$scope.finalTemperature= roundedTemp3hour_currentloc+"°C";
-			 					$scope.descriptionWeather= $scope.content.list[5].weather[0].description;
-			 					$scope.weatherIcon = response.data.list[5].weather[0].icon;
-			 					document.getElementById('3hr_fifthTemp').innerHTML =$scope.finalTemperature;
-			 					document.getElementById('3hr_fifthWDescription').innerHTML =$scope.descriptionWeather;
-			 					document.getElementById('3hr_fifthWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-								 break;
-						}
-						$scope.fahrenheit = function() {
-							$scope.fahrenheitCoverter=roundedTemperature_currentloc*(9/5)+32;
-							$scope.fahrenheitCoverter_3hr=roundedTemp3hour_currentloc*(9/5)+32;
-							$scope.finalTempView= Math.round($scope.fahrenheitCoverter)+"°F";
-							$scope.finalTemperature= Math.round($scope.fahrenheitCoverter_3hr)+"°F";
-						}
-						$scope.celsius = function() {
-							$scope.celsiusConverter=($scope.fahrenheitCoverter-32)*(5/9);
-							$scope.celsiusConverter_3hr=($scope.fahrenheitCoverter_3hr-32)*(5/9);
-							$scope.finalTempView= Math.round($scope.celsiusConverter)+"°C";
-							$scope.finalTemperature= Math.round($scope.celsiusConverter_3hr)+"°C";
-						}
-					}	
-					//for different background at different weather			
-					switch($scope.content.list[0].weather[0].main){
-						case "Rain":
-							$('#body').css('background-image', 'url(rain.jpg)');
-							$('#body').css('background-size', 'auto auto');
-							break;
-						case "Clear":
-							$('#body').css('background-image', 'url(clear.jpg)');
-							$('#body').css('background-size', 'auto auto');
-							break;
-						case "Clouds":
-							$('#body').css('background-image', 'url(clouds.png)');
-							$('#body').css('background-size', 'auto auto');
-							break;
-							}
-				current_weather_icon.style.visibility = 'visible';
-				$('#body').animateCss('flipInX');
-				$('#animate').animateCss('fadeInRightBig');
-				document.getElementById('weatherIcon_current').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-	  /* $scope.url1 = "http://localtimes.info/clock.php?country="+country+"&city="+ct+"&cp1_Hex=000000&cp2_Hex=FFFFFF&cp3_Hex=000000&fwdt=200&ham=0&hbg=0&hfg=0&sid=0&mon=0&wek=0&wkf=0&sep=0&widget_number=2000";
-	  var container = document.getElementById("script");
-var content = document.createElement("script");
-content.src = $scope.url1;
-container.appendChild(content);*/
-
-	  //document.getElementById("script").innerHTML
-				}, function(response) {
-					$scope.content = "OOPS Something went wrong";
-				});
-			}, function(response) {
-				$scope.content = "OOPS Something went wrong";
-			});
-		}, function(response) {
-			$scope.content = " OOPS Something went wrong";
-		});
-	}, 0);
-	var current_weather_icon = document.getElementById('weatherIcon_current'); //identifying current weather icon in the html
-	current_weather_icon.style.visibility = 'hidden';
-
-//finding weatherforecasts for different locations
-
-	$(".watchInput").on("change keydown",function(){
-		setTimeout(function () {
-		var cityName=$scope.city;
-		if(cityName!==undefined){
-			$http.get("http://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&mode=json&appid=56c89ec82c5dc251f6c37dc7d752e0d8&units=metric")
-			.then(function(response) {
-				$scope.weatherIcon = response.data.list[0].weather[0].icon;
-				var roundedTemperature_searchedLoc = Math.round(response.data.list[0].main.temp);
-				console.log(roundedTemperature_searchedLoc)
-				$scope.finalTempView= roundedTemperature_searchedLoc+"°C";
-				$scope.content = response.data;
-				$scope.windSpeed= $scope.content.list[0].wind.speed+" m/s";
-				$scope.humidity= $scope.content.list[0].main.humidity+"%";
-				$scope.pressure= $scope.content.list[0].main.pressure+" hpa";
-				$scope.maxTemp= $scope.content.list[0].main.temp_max+"°C";
-				$scope.minTemp= $scope.content.list[0].main.temp_min+"°C";
-				$scope.weatherDescription= $scope.content.list[0].weather[0].description;
-				var latitude = $scope.content.city.coord.lat;
-				var longitude = $scope.content.city.coord.lon;
-				$http.get("http://api.geonames.org/timezoneJSON?lat="+latitude+"&lng="+longitude+"&username=kararha")
-				.then(function(response) {
-					dateAndTime = response.data.time;
-					$scope.currentTime = dateAndTime.slice(10,16);
-					console.log(response.data);			
-				}, function(response) {
-					$scope.content = "OOPS Something went wrong";
-				});
-				for(var i=0;i<8;i++){
-					switch(i){
-						case 1:
-							var roundedTemp3hour = Math.round(response.data.list[1].main.temp);
-							$scope.finalTemperature= roundedTemp3hour+"°C";
-							$scope.descriptionWeather= response.data.list[1].weather[0].description;
-							$scope.weatherIcon = response.data.list[1].weather[0].icon;
-							document.getElementById('3hr_firstTemp').innerHTML =$scope.finalTemperature;
-							document.getElementById('3hr_firstWDescription').innerHTML =$scope.descriptionWeather;
-							document.getElementById('3hr_firstWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-							break;
-						case 2:
-							roundedTemp3hour = Math.round(response.data.list[2].main.temp);
-							$scope.finalTemperature= roundedTemp3hour+"°C";
-							$scope.descriptionWeather= response.data.list[2].weather[0].description;
-							$scope.weatherIcon = response.data.list[2].weather[0].icon;
-							document.getElementById('3hr_secondTemp').innerHTML =$scope.finalTemperature;
-							document.getElementById('3hr_secondWDescription').innerHTML =$scope.descriptionWeather;
-							document.getElementById('3hr_secondWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-							break;
-						case 3:
-							roundedTemp3hour = Math.round(response.data.list[3].main.temp);
-							$scope.finalTemperature= roundedTemp3hour+"°C";
-							$scope.descriptionWeather= response.data.list[3].weather[0].description;
-							$scope.weatherIcon = response.data.list[3].weather[0].icon;
-							document.getElementById('3hr_thirdTemp').innerHTML =$scope.finalTemperature;
-							document.getElementById('3hr_thirdWDescription').innerHTML =$scope.descriptionWeather;
-							document.getElementById('3hr_thirdWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-							break;
-						case 4:
-							roundedTemp3hour = Math.round(response.data.list[4].main.temp);
-							$scope.finalTemperature= roundedTemp3hour+"°C";
-							$scope.descriptionWeather= response.data.list[4].weather[0].description;
-							$scope.weatherIcon = response.data.list[4].weather[0].icon;
-							document.getElementById('3hr_fourthTemp').innerHTML =$scope.finalTemperature;
-							document.getElementById('3hr_fourthWDescription').innerHTML =$scope.descriptionWeather;
-							document.getElementById('3hr_fourthWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-							break;
-						case 5:
-							roundedTemp3hour = Math.round(response.data.list[5].main.temp);
-							$scope.finalTemperature= roundedTemp3hour+"°C";
-							$scope.descriptionWeather= response.data.list[5].weather[0].description;
-							$scope.weatherIcon = response.data.list[5].weather[0].icon;
-							document.getElementById('3hr_fifthTemp').innerHTML =$scope.finalTemperature;
-							document.getElementById('3hr_fifthWDescription').innerHTML =$scope.descriptionWeather;
-							document.getElementById('3hr_fifthWeather').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-							break;
-					}
-					$scope.fahrenheit_C = function() {
-							$scope.fahrenheitCoverter=roundedTemperature_searchedLoc*(9/5)+32;
-							$scope.fahrenheitCoverter_3hr=roundedTemp3hour*(9/5)+32;
-							$scope.finalTempView= Math.round($scope.fahrenheitCoverter)+"°F";
-							$scope.finalTemperature= Math.round($scope.fahrenheitCoverter_3hr)+"°F";
-						}
-						$scope.celsius_C = function() {
-							$scope.celsiusConverter=($scope.fahrenheitCoverter-32)*(5/9);
-							$scope.celsiusConverter_3hr=($scope.fahrenheitCoverter_3hr-32)*(5/9);
-							$scope.finalTempView= Math.round($scope.celsiusConverter)+"°C";
-							$scope.finalTemperature= Math.round($scope.celsiusConverter_3hr)+"°C";
-						}
-			} 
-			//background at different weather forecast of searched location
-			switch($scope.content.list[0].weather[0].main){
-				case "Rain":
-					$('#body').css('background-image', 'url(rain.jpg)');
-					$('#body').css('background-size', 'auto auto');
-					break;
-				case "Clear":
-					$('#body').css('background-image', 'url(clear.jpg)');
-					$('#body').css('background-size', 'auto auto');
-					break;
-				case "Clouds":
-					$('#body').css('background-image', 'url(clouds.png)');
-					$('#body').css('background-size', 'auto auto');
-					break;
-			}
-				current_weather_icon.style.visibility = 'visible';
-				$('#body').animateCss('fadeIn');
-				$('#animate').animateCss('fadeInRightBig');
-				document.getElementById('weatherIcon_current').src = "http://openweathermap.org/img/w/"+$scope.weatherIcon+".png";
-				console.log($scope.content);
-			}, function(response) {
-				$scope.content = " OOPS Something went wrong";
-			});
-			$scope.$apply();
-			}
-		}, 7000);
-	});
-}])
 </script>
 </head>
 <body class="animated fadeIn">
@@ -303,10 +34,10 @@ container.appendChild(content);*/
 			<nav class="pure-drawer" data-position="left">
 				<p style="padding: 100px 20px; margin: 0;"><input ng-model="city" id="input" class="watchInput center-block" id="search" align="middle" type="text" class="form-control"/><form class="form">
 					<div class="switch-field">
-						<input type="radio" id="switch_left" name="switch_2" value="°C" ng-click="celsius(); celsius_C();" checked/>
-						<label for="switch_left">C</label>
-						<input type="radio" id="switch_right" name="switch_2" value="°F" ng-click="fahrenheit(); fahrenheit_C();" />
-						<label for="switch_right">F</label>
+						<input type="radio" id="switch_left" name="switch_2" value="C" ng-click="celsius(); celsius_C();" checked/>
+						<label for="switch_left">°C</label>
+						<input type="radio" id="switch_right" name="switch_2" value="F" ng-click="fahrenheit(); fahrenheit_C();" />
+						<label for="switch_right">°F</label>
 					</div>
 				</form></p>
 			</nav>   
@@ -318,6 +49,7 @@ container.appendChild(content);*/
 						<p></p>
 						<p>
 							<div class="threehr_interval_container"><div class="left-div left-text">
+							 
 								<h1 align="center" id="animate">{{content.city.name}}</h1>
 								<h1 align="center" id="animate">Time:&nbsp;{{currentTime}}</h1>
 								<div style="margin: 15px 0px 0px; display: inline-block; text-align: center; width: 200px;" id="script"></div>
@@ -348,11 +80,11 @@ container.appendChild(content);*/
 
 
 					</div></div>
-					<div class="threehr_interval_container"><div class="right-div right-text"><img src="" id="3hr_firstWeather" width="60" height="60"/><h6 id="3hr_firstTemp" align="center"></h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_firstWDescription"></h6></div><div class="right-div right-text">
-					<img src="" id="3hr_secondWeather" width="60" height="60"/><h6 id="3hr_secondTemp" align="center"></h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_secondWDescription"></h6>
-				</div><div class="right-div right-text"><img src="" id="3hr_thirdWeather" width="60" height="60"/><h6 id="3hr_thirdTemp" align="center"></h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_thirdWDescription"></h6></div>
-				<div class="right-div right-text"><img src="" id="3hr_fourthWeather" width="60" height="60"/><h6 id="3hr_fourthTemp" align="center"></h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_fourthWDescription"></h6></div>
-				<div class="right-div right-text"><img src="" id="3hr_fifthWeather" width="60" height="60"/><h6 id="3hr_fifthTemp" align="center"></h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_fifthWDescription"></h6>
+					<div class="threehr_interval_container1"><div class="right-div right-text"><h6 align="center" id="3hr_firstTime"></h6><img src="" id="3hr_firstWeather" width="60" height="60"/><h6 align="center">{{finalTemperature_first}}</h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_firstWDescription"></h6></div><div class="right-div right-text">
+					<h6 align="center" id="3hr_secondTime"></h6><img src="" id="3hr_secondWeather" width="60" height="60"/><h6 align="center">{{finalTemperature_second}}</h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_secondWDescription"></h6>
+				</div><div class="right-div right-text"><h6 align="center" id="3hr_thirdTime"></h6><img src="" id="3hr_thirdWeather" width="60" height="60"/><h6 align="center">{{finalTemperature_third}}</h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_thirdWDescription"></h6></div>
+				<div class="right-div right-text"><h6 align="center" id="3hr_fourthTime"></h6><img src="" id="3hr_fourthWeather" width="60" height="60"/><h6 align="center">{{finalTemperature_fourth}}</h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_fourthWDescription"></h6></div>
+				<div class="right-div right-text"><h6 align="center" id="3hr_fifthTime"></h6><img src="" id="3hr_fifthWeather" width="60" height="60"/><h6 align="center">{{finalTemperature_fifth}}</h6><h6>{{content.city.name}}</h6><h6 class="h6" id="3hr_fifthWDescription"></h6>
 				</div></div></div></p>
 			</div>
 		</div>

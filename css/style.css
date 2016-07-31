@@ -137,6 +137,17 @@ input.cmn-toggle-round:checked + label:after {
   text-align: center;
   padding: 15px;  
 }
+.threehr_interval_container1
+{
+  max-width: auto;
+  max-height:auto;
+  text-align: center;
+  padding: 30px;
+  background: white;
+  opacity:0.6;
+  border-radius: 50px 0px;
+  margin: 15px;
+}
 
 .left-div
 {
