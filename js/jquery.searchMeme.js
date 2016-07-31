@@ -101,3 +101,23 @@
         }
     });
 })(jQuery);
+ /*city,country serachbox*/
+  $(document).ready(function () {
+    var search = $('#input').searchMeme({ onSearch: function (searchText) {
+      setTimeout(function () {
+        search.searchMeme({ searchComplete: true });
+        alert(cityName);
+      }, 1);
+    }
+    , buttonPlacement: 'left', button: 'black'
+  });
+    
+    $.fn.extend({
+      animateCss: function (animationName) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        $(this).addClass('animated ' + animationName).one(animationEnd, function() {
+          $(this).removeClass('animated ' + animationName);
+        });
+      }
+    });
+  });
