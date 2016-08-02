@@ -1,44 +1,11 @@
-/**************
-## Animation ##
-**************/
-/************
-## Toggler ##
-************/
-/***********
-## Drawer ##
-***********/
-/***********
-## Pusher ##
-***********/
-/*******************
-## Pusher Overlay ##
-*******************/
-/**************
-## Variables ##
-**************/
-/*************
-## Required ##
-*************/
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-}
-
-/**************
-## Container ##
-**************/
+/* Container */
 .pure-container {
   position: relative;
   height: 100%;
   -webkit-overflow-scrolling: touch;
 }
 
-/************
-## Toggler ##
-************/
+/* Toggler */
 .pure-toggle {
   left: -9999px;
   position: absolute;
@@ -179,9 +146,7 @@ body {
   top: 10px;
 }
 
-/***********
-## Drawer ##
-***********/
+/* Drawer */
 .pure-drawer {
   position: fixed;
   top: 0;
@@ -240,18 +205,14 @@ body {
   }
 }
 
-/*********************
-## Pusher Container ##
-*********************/
+/* Pusher Container */
 .pure-pusher-container {
   position: relative;
   height: 100%;
   overflow: hidden;
 }
 
-/***********
-## Pusher ##
-***********/
+/* Pusher */
 .pure-pusher {
   position: relative;
   height: 100%;
@@ -267,9 +228,7 @@ body {
           transition-timing-function: ease-out;
 }
 
-/*******************
-## Pusher Overlay ##
-*******************/
+/* Pusher Overlay */
 .pure-overlay {
   position: fixed;
   top: 0;
@@ -346,9 +305,7 @@ body {
   z-index: 2;
 }
 
-/********************************
-## Fallback for older browsers ##
-********************************/
+/* Fallback for older browsers */
 .no-csstransforms3d .pure-toggle[data-toggle='left']:checked ~ .pure-pusher-container .pure-pusher {
   left: 100%;
 }
@@ -397,9 +354,7 @@ body {
   }
 }
 
-/*****************************
-## Effect - Slide in on top ##
-*****************************/
+/* Effect - Slide in on top */
 /* DRAWER */
 [data-effect='pure-effect-slide'] .pure-drawer {
   z-index: 3;
@@ -438,9 +393,7 @@ body {
           transition-delay: 250ms;
 }
 
-/********************
-## Effect - Reveal ##
-********************/
+/* Effect - Reveal */
 /* DRAWER */
 [data-effect='pure-effect-reveal'] .pure-drawer {
   visibility: visible;
@@ -622,9 +575,7 @@ body {
           transition-delay: 250ms;
 }
 
-/*******************************
-## Effect - Reverse slide out ##
-*******************************/
+/* Effect - Reverse slide out */
 /* DRAWER */
 [data-effect='pure-effect-reverseSlide'] .pure-drawer {
   -webkit-transition-duration: 500ms;
@@ -723,9 +674,7 @@ body {
           transition-duration: 500ms;
 }
 
-/*********************************
-## Effect 5 - Scale Down Pusher ##
-*********************************/
+/* Effect 5 - Scale Down Pusher */
 /* DRAWER */
 [data-effect='pure-effect-scaleDown'] .pure-drawer {
   -webkit-transition-duration: 500ms;
@@ -796,9 +745,7 @@ body {
           transition-delay: 250ms;
 }
 
-/*************************
-## Effect - Scale Up ##
-*************************/
+/* Effect - Scale Up */
 /* CONTAINER */
 [data-effect='pure-effect-scaleUp'] {
   -webkit-perspective: 1500px;
@@ -962,9 +909,7 @@ body {
           transition-delay: 250ms;
 }
 
-/****************************************
-## Effect - Scale and Rotate Pusher ##
-****************************************/
+/* Effect - Scale and Rotate Pusher */
 /* DRAWER */
 [data-effect='pure-effect-scaleRotate'] .pure-drawer {
   -webkit-transition-duration: 500ms;
@@ -1029,9 +974,7 @@ body {
           transition-delay: 250ms;
 }
 
-/**************************
-## Effect - Fall in ##
-**************************/
+/* Effect - Fall in */
 /* DRAWER */
 [data-effect='pure-effect-fall'] .pure-drawer {
   -webkit-transition-duration: 500ms;
@@ -1132,9 +1075,7 @@ body {
           transition-delay: 250ms;
 }
 
-/*********************
-## Effect - Push ##
-*********************/
+/* Effect - Push */
 /* DRAWER */
 [data-effect='pure-effect-push'] .pure-drawer {
   -webkit-transition-duration: 500ms;
@@ -1235,9 +1176,7 @@ body {
           transition-delay: 250ms;
 }
 
-/********************
-## Effect - Bounce ##
-********************/
+/* Effect - Bounce */
 /* DRAWER */
 [data-effect="pure-effect-bounce"] .pure-drawer {
   z-index: 3;
@@ -1287,9 +1226,7 @@ body {
           transition-delay: 500ms;
 }
 
-/*******************
-## Effect - FlipX ##
-*******************/
+/* Effect - FlipX */
 /* DRAWER */
 [data-effect="pure-effect-flipX"] .pure-drawer {
   z-index: 3;
@@ -1313,9 +1250,7 @@ body {
           transition-delay: 500ms;
 }
 
-/*******************
-## Effect - FlipY ##
-*******************/
+/* Effect - FlipY */
 /* DRAWER */
 [data-effect="pure-effect-flipY"] .pure-drawer {
   z-index: 3;
@@ -1339,9 +1274,7 @@ body {
           transition-delay: 500ms;
 }
 
-/******************
-## Effect - Zoom ##
-******************/
+/* Effect - Zoom */
 /* DRAWER */
 [data-effect="pure-effect-zoom"] .pure-drawer {
   z-index: 3;
@@ -1365,12 +1298,6 @@ body {
           transition-delay: 500ms;
 }
 
-/*!
-Animate.css - http://daneden.me/animate
-Licensed under the MIT license - http://opensource.org/licenses/MIT
-
-Copyright (c) 2014 Daniel Eden
-*/
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
@@ -1469,7 +1396,6 @@ Copyright (c) 2014 Daniel Eden
   animation-name: flash;
 }
 
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 @-webkit-keyframes pulse {
   0% {
     -webkit-transform: scale3d(1, 1, 1);
@@ -3638,7 +3564,6 @@ Copyright (c) 2014 Daniel Eden
   animation-name: rollIn;
 }
 
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 @-webkit-keyframes rollOut {
   0% {
     opacity: 1;

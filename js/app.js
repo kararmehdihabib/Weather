@@ -3,6 +3,9 @@
   /*Controller*/
   .controller('weatherCtrl', ['$scope', '$http', function($scope, $http ) {
     setTimeout(function () {
+     /* $http.get("https://api.forecast.io/forecast/b3c47e4ece9dcfb81f4c779f1c4b6e95/37.8267,-122.423")
+      .then(function(response) {
+        console.log(response.data);*/
       $http.get("http://ip-api.com/json")
       .then(function(response) {
         currentLocationInfo=response.data;
@@ -33,6 +36,16 @@
             $scope.tempMin= Math.round($scope.content.list[0].main.temp_min);
             $scope.minTemp= $scope.tempMin+"°C";
             $scope.weatherDescription= $scope.content.list[0].weather[0].description;
+            for(k=0;k<39;k++){
+              var d = $scope.content.list[k].dt_txt;
+              var d1 = $scope.content.list[k+1].dt_txt;
+              var dt = d.slice(8,10);
+              var dt2 = d1.slice(8,10);
+            if(dt!==dt2){
+              console.log(dt);
+          }
+        }
+          
             //3 hour interval weather forecast
             for(var j=0;j<8;j++){
               switch(j){
@@ -155,6 +168,9 @@ content.src = $scope.url1;
 container.appendChild(content);*/
 
     //document.getElementById("script").innerHTML
+    /*}, function(response) {
+          $scope.content = "OOPS Something went wrong";
+        });*/
         }, function(response) {
           $scope.content = "OOPS Something went wrong";
         });
